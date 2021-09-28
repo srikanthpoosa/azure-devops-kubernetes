@@ -10,7 +10,7 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: Write-Host Hello, world!
+- script: Write-Host Hello, changed world!
 - script: Write-Host this is the new build agent installed!!
   displayName: 'Run a one-line script'
 
