@@ -10,11 +10,23 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: Write-Host Hello, changed again world!
-- script: Write-Host this is the new build agent installed!!
+- script: Write-Host terraform k8s azure!
   displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- task: DownloadSecureFile@1
+  name: publickey
+  inputs:
+    secureFile: 'azure_rsa.pub'
+- task: TerraformCLI@0
+  inputs:
+    command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/kubernetes'
+    commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.securefilepath)'
+    backendType: 'azurerm'
+    backendServiceArm: 'azureaksconnection'
+    ensureBackend: true
+    backendAzureRmResourceGroupName: 'terraform-k8s'
+    backendAzureRmResourceGroupLocation: 'centralus'
+    backendAzureRmStorageAccountName: 'yashwanthstoragexxyz'
+    backendAzureRmContainerName: 'yashwanthstoragecontainer'
+    backendAzureRmKey: 'terraform-dev.tfstate'
+    allowTelemetryCollection: true
