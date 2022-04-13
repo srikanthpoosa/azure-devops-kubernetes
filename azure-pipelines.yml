@@ -7,16 +7,21 @@ trigger:
 - main
 
 pool:
-  name: selfLinuxagent
+  name: selfwindowsagent
   demands:
-   - agent.name -equals myLinuxVM
-
-steps:
-
-
-- task: Docker@2
-  inputs:
-    containerRegistry: 'dockerhubconnection'
-    repository: 'srikanthpoosal/devopsrepo'
-    command: 'buildAndPush'
-    Dockerfile: '**/Dockerfile'
+   - agent.name -equals SREE-PC
+stages:
+ - stage: Build
+   displayName: Build image
+   jobs:
+     - job: Build
+       displayName: Build
+       pool:
+        vmImage: 'ubuntu-latest'
+       steps:
+        - task: Docker@2
+          inputs:
+            containerRegistry: 'dockerhubconnection'
+            repository: 'srikanthpoosal/devopsrepo'
+            command: 'buildAndPush'
+            Dockerfile: '**/Dockerfile'
