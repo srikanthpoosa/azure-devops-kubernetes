@@ -7,10 +7,7 @@ resources:
 variables:
   tag: '$(Build.BuildId)'
 
-pool:
-   name: selfwindowsagent
-   demands: 
-    - agent.name -equals SREE-PC
+
 
 stages:
 - stage: Build
@@ -19,7 +16,9 @@ stages:
   - job: Build
     displayName: Build
     pool:
-      vmImage: 'ubuntu-latest'
+       name: selfwindowsagent
+       demands:
+       - agent.name -equals SREE-PC
     steps:
     - task: Docker@2
       inputs:
