@@ -7,26 +7,16 @@ trigger:
 - main
 
 pool:
-  vmImage: ubuntu-latest
+  name: selfLinuxagent
+  demands:
+   - agent.name -equals myLinuxVM
 
 steps:
-- script: Write-Host terraform k8s azure!
-  displayName: 'Run a one-line script'
-- task: DownloadSecureFile@1
-  name: publickey
+
+
+- task: Docker@2
   inputs:
-    secureFile: 'azure_rsa.pub'
-- task: TerraformCLI@0
-  inputs:
-    command: 'init'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure/kubernetes'
-    commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.securefilepath)'
-    backendType: 'azurerm'
-    backendServiceArm: 'azureaksconnection'
-    ensureBackend: true
-    backendAzureRmResourceGroupName: 'terraform-k8s'
-    backendAzureRmResourceGroupLocation: 'centralus'
-    backendAzureRmStorageAccountName: 'yashwanthstoragexxyz'
-    backendAzureRmContainerName: 'yashwanthstoragecontainer'
-    backendAzureRmKey: 'terraform-dev.tfstate'
-    allowTelemetryCollection: true
+    containerRegistry: 'dockerhubconnection'
+    repository: 'srikanthpoosal/devopsrepo'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
