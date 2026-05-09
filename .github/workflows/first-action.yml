@@ -1,14 +1,25 @@
-name: first-action-workflow
+name: react_ci_test
 on: workflow_dispatch
 jobs:
-  build-job:
+  react_ci_test:
    runs-on: ubuntu-latest
    steps:
-     - name: display greeting
-       run: |
-            echo "first run"
-            echo "second run"
-            echo "third run"
-     - name: display echo run
-       run: echo "this is the last run of pipeline"
+      - name: get code
+        uses: actions/checkout@v4
+      - name: setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+      - name: Install Dependencies
+        run: npm ci
+      - name: Run Eslint
+        run: npm run lint --if-present
+      - name: run unit test
+        run: npm test -- --watchAll=false
+        env:
+         CI: true
+      - name: Build react App
+        run: npm run build       
+
   
