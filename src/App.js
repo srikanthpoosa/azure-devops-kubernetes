@@ -1,8 +1,5 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+function App() {
+  return <h1>React App</h1>;
+}
 
-test('renders app title', () => {
-  render(<App />);
-  const textElement = screen.getByText(/react/i);
-  expect(textElement).toBeInTheDocument();
-});
+export default App;
