@@ -5,7 +5,10 @@ jobs:
    runs-on: ubuntu-latest
    steps:
      - name: display greeting
-       run: echo "this pipeline prints helloworld"
+       run: |
+            echo "first run"
+            echo "second run"
+            echo "third run"
      - name: display echo run
        run: echo "this is the last run of pipeline"
   
