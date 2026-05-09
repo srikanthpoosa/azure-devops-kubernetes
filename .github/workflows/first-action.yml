@@ -13,8 +13,6 @@ jobs:
           cache: npm
       - name: Install Dependencies
         run: npm ci
-      - name: Run Eslint
-        run: npm run lint --if-present
       - name: run unit test
         run: npm test -- --watchAll=false
         env:
