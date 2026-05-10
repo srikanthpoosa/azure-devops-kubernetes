@@ -20,6 +20,7 @@ jobs:
       - name: Build react App
         run: npm run build   
   deploy: 
+    needs: react_ci_test
     runs-on: ubuntu-latest
     steps:
       - name: get code
