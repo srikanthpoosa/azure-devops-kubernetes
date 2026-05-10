@@ -1,5 +1,5 @@
 name: react_ci_test
-on: push
+on: [push, workflow_dispatch]
 jobs:
   react_ci_test:
    runs-on: ubuntu-latest
