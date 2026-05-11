@@ -13,7 +13,7 @@ jobs:
           node-version: 18
           cache: npm
       - name: Install Dependencies
-        run: npm ci
+        run: npm install
       - name: run unit test
         run: npm test -- --watchAll=false
         env:
@@ -30,7 +30,7 @@ jobs:
           node-version: 18
           cache: npm     
       - name: install dependencies
-        run: npm ci
+        run: npm install
       - name: build react
         run: npm run build
       - name: Upload artifacts
