@@ -1,7 +1,16 @@
 name: react_ci_test
 on: [push, workflow_dispatch]
 jobs:
-  react_ci_test:
+  lint:
+   runs-on: ubuntu-latest
+   steps:
+      - name: get code
+        uses: actions/checkout@v4
+      - name: Install Dependencies
+        run: npm ci  
+      - name: run lint
+        run: npm run lint
+  test:
    runs-on: ubuntu-latest
    steps:
       - name: get code
@@ -20,7 +29,7 @@ jobs:
       - name: Build react App
         run: npm run build   
   deploy: 
-    needs: react_ci_test
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: get code
