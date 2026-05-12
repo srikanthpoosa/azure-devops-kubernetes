@@ -3,6 +3,7 @@ on: [push, workflow_dispatch]
 
 jobs:
   test:
+   environment: Testing
    runs-on: ${{ vars.RUNNER }}
    steps:
       - name: get code
