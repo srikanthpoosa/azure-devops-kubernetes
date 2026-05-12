@@ -12,6 +12,11 @@ jobs:
         with:
           node-version: 18
           cache: npm
+      - name: get cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: deps-node-modules-${{ hashFiles('**/package-lock.json')}}    
       - name: Install Dependencies
         run: npm install
       - name: run unit test
@@ -24,11 +29,11 @@ jobs:
     steps:
       - name: get code
         uses: actions/checkout@v4
-      - name: setup Node.js
-        uses: actions/setup-node@v4
+      - name: get cache
+        uses: actions/cache@v4
         with:
-          node-version: 18
-          cache: npm     
+          path: ~/.npm
+          key: deps-node-modules-${{ hashFiles('**/package-lock.json')}}     
       - name: install dependencies
         run: npm install
       - name: build react
