@@ -5,7 +5,7 @@ import App from './App';
 //this is to skip the ci
 
 test('renders app title', () => {
-  render(<App />);
+  render(<Ap />);
   const textElement = screen.getByText(/react/i);
   expect(textElement).toBeInTheDocument();
 });
