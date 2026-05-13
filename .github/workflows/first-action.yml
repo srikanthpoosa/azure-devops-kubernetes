@@ -63,3 +63,12 @@ jobs:
           run: ls    
         - name:  deployapp
           run: echo "deploying.."  
+  report:
+    needs: [test, build, deploy]
+    if: failure()
+    runs-on: ${{ vars.RUNNER }}
+    steps:
+    - name: Output-information
+      run: |
+        echo "something is wrong"
+        echo ${{ github }}
