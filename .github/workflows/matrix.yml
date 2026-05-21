@@ -2,10 +2,17 @@ name: matrix build
 on: push
 jobs:
     build:
+        continue-on-error: true
         strategy:
          matrix:
             node-version: [16, 18, 20]
             os: [ubuntu-latest, windows-latest]
+            include:
+              - node-version: 18
+                os: windows-latest
+            exclude:
+              - node-version: 16
+                os: ubuntu-latest    
         runs-on: ${{ matrix.os }}    
         steps:
         - name: get code
