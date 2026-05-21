@@ -1,8 +1,5 @@
 name: react_ci_test
-on: 
-  pull_request:
-    types: opened
-  workflow_dispatch:  
+on: push 
   
 jobs:
   test:
