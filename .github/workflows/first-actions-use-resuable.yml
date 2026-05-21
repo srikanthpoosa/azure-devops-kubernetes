@@ -19,8 +19,14 @@ jobs:
         env:
          CI: true
       - name: Build react App
-        run: npm run build   
+        run: npm run build
+      - name: upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: react-build
+          path:  build    
   deploy: 
     needs: test
     uses: ./.github/workflows/resuable.yml
-    
+    with:
+      artifact-name: react-build    

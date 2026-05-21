@@ -1,10 +1,23 @@
 name: resuable deploy
-on: workflow_call
+on: 
+    workflow_call:
+        inputs:
+         artifact-name:   
+            description: 'name of the artifact to deploy'
+            required: true
+            type: string
+            default: react-build
 jobs:
   deploy: 
     runs-on: ubuntu-latest
     steps:
       - name: get code
         uses: actions/checkout@v4
+      - name: download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ inputs.artifact-name}}  
+      - name: list files
+        run: ls -R build    
       - name: output event info
         run: echo "deploying with event info:${{ toJson(github.event) }}"
