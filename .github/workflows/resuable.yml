@@ -1,0 +1,10 @@
+name: resuable deploy
+on: workflow_call
+jobs:
+  deploy: 
+    runs-on: ubuntu-latest
+    steps:
+      - name: get code
+        uses: actions/checkout@v4
+      - name: output event info
+        run: echo "deploying with event info:${{ toJson(github.event) }}"
