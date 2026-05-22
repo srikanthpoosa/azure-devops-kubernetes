@@ -4,6 +4,7 @@ on: push
 jobs:
   test:
    runs-on: ubuntu-latest
+   container: node:18
    steps:
       - name: get code
         uses: actions/checkout@v4
@@ -25,8 +26,8 @@ jobs:
         with:
           name: react-build
           path:  build    
-  deploy: 
-    needs: test
-    uses: ./.github/workflows/resuable.yml
-    with:
-      artifact-name: react-build    
+  # deploy: 
+  #   needs: test
+  #   uses: ./.github/workflows/resuable.yml
+  #   with:
+  #     artifact-name: react-build    
